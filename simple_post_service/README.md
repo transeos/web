@@ -37,6 +37,7 @@ If you are running VMware, you would have to disable Intel VT-x/EPT or AMD-V/RVI
 3. Click on *Kubernetes" at side panel.
 4. Check *Enable Kubernetes*.
 5. Click on *Apply & restart* button. Click on *Install* button.
+6. Open PowerShell and run *kubectl* command to check whether Docker is working.
 
 ## Ingress-nginx
 Detailed installation can be found [here](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start).
@@ -54,7 +55,7 @@ Detailed installation can be found [here](https://kubernetes.github.io/ingress-n
 Detailed installation can be found [here](https://skaffold.dev/docs/install).
 1. Install Skaffold using the Chocolatey package manager.
 ```sh
-choco install -y skaffold
+  choco install -y skaffold
 ```
 
 
@@ -71,12 +72,20 @@ choco install -y skaffold
 1. Go to "..\web\simple_post_service" folder.
 2. Run below command in PowerShell.
 ```sh
-skaffold dev
+  skaffold dev
 ```
-3. First time skaffold launch often fails. Just run it again if it fails.
+3. First time Skaffold launch often fails. Just run it again if it fails.
 
 ## Open react app
 1. Open Chrome.
 2. Go to "https://posts.com" page.
 3. It will show an error that *Your connection isn't private". DO NOT TRY TO CONTINUE TO post.com (unsafe) through Advanced option.
 4. Manually type *thisisunsafe* to skip the error.
+
+## Close all services
+1. Stop Skaffold.
+1. Go to "..\web\simple_post_service\infra\k8s" folder.
+2. Run below command in PowerShell.
+```sh
+  kubectl delete -f .
+```
