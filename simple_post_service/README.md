@@ -56,3 +56,27 @@ Detailed installation can be found [here](https://skaffold.dev/docs/install).
 ```sh
 choco install -y skaffold
 ```
+
+
+# Run post service
+
+## Hosts file tweak 
+1. Open "C:\Windows\System32\drivers\etc\hosts" in Notepad++.
+2. Add *127.0.0.1 posts.com* at the end of the file.
+3. Try to save the file.
+4. The prompt will be shown to launch Notepad++ in Administrator mode. Click on *Yes* button. Click on *Yes* button of UAC prompt.
+5. Now save the file.
+
+## Run Skaffold
+1. Go to "..\web\simple_post_service" folder.
+2. Run below command in PowerShell.
+```sh
+skaffold dev
+```
+3. First time skaffold launch often fails. Just run it again if it fails.
+
+## Open react app
+1. Open Chrome.
+2. Go to "https://posts.com" page.
+3. It will show an error that *Your connection isn't private". DO NOT TRY TO CONTINUE TO post.com (unsafe) through Advanced option.
+4. Manually type *thisisunsafe* to skip the error.
