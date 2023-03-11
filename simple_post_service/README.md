@@ -42,19 +42,19 @@ If you are running VMware, you would have to disable Intel VT-x/EPT or AMD-V/RVI
 6. Open PowerShell and run *kubectl* command to check if Kubernetes is working.
 
 ## Ingress-nginx
-Detailed installation can be found [here](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start).
+Detailed installation instructions can be found [here](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start).
 
 1. Assuming *Helm* is not installed, run Ingress-nginx from a yaml manifest. If there is a windows firewall prompt, allow access too both private and public network.
 ```sh
   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.6.4/deploy/static/provider/cloud/deploy.yaml
 ```
-2. A few pods should start in the *ingress-nginx* namespace. Open PowerShell as Administrator and run below command.
+2. A few pods should start in the *ingress-nginx* namespace. Open PowerShell and run below command.
 ```sh
   kubectl get pods --namespace=ingress-nginx
 ```
 
 ## Skaffold
-Detailed installation can be found [here](https://skaffold.dev/docs/install).
+Detailed installation instructions can be found [here](https://skaffold.dev/docs/install).
 1. Install Skaffold using the Chocolatey package manager.
 ```sh
   choco install -y skaffold
