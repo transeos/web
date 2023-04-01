@@ -152,3 +152,11 @@ Run below command in PowerShell/Terminal -
 ```sh
   kubectl delete -f .
 ```
+
+## Run unit tests
+Go to "auth" directory. Install node modules and run tests
+```sh
+  cd auth
+  npm i
+  npm run test
+```
