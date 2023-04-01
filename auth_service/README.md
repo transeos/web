@@ -133,7 +133,7 @@ Detailed installation can be found [here](https://skaffold.dev/docs/install).
 1. Go to "..\web\auth_service" folder.
 2. Run below command in PowerShell/Terminal.
 ```sh
-  skaffold dev
+  kubectl create secret generic jwt-secret --from-literal JWT_KEY=asdf
 ```
 3. First time Skaffold launch often fails. Just run it again if it fails.
 
@@ -148,7 +148,7 @@ Please note that signup/signin/signout buttons are present in the top-right corn
 1. Stop Skaffold with `Ctrl+C`.
 2. Run following command in Powershell/Terminal to stop all kubernetes pods and services
 ```sh
-  kubectl create secret generic jwt-secret --from-literal JWT_KEY=asdf
+  skaffold delete --namespace=default
 ```
 In MacOS, even without using Skaffold, you can stop all kubernetes pods and services.<br/>
 <br/>
