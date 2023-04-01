@@ -123,9 +123,15 @@ Detailed installation can be found [here](https://skaffold.dev/docs/install).
 
 # Run auth service
 
+## Create secret key inside Kubernetes cluster
+1. Run below command in PowerShell/Terminal with "asdf" as secret key.
+```sh
+  kubectl create secret generic jwt-secret --from-literal JWT_KEY=asdf
+```
+
 ## Run Skaffold
 1. Go to "..\web\auth_service" folder.
-2. Run below command in PowerShell.
+2. Run below command in PowerShell/Terminal.
 ```sh
   skaffold dev
 ```
@@ -139,8 +145,8 @@ Detailed installation can be found [here](https://skaffold.dev/docs/install).
 Please note that signup/signin/signout buttons are present in the top-right corner.
 
 ## Close all services
-1. Stop Skaffold.
-2. Run following command in Powershell (for windows) to stop all kubernetes pods and services
+1. Stop Skaffold with `Ctrl+C`.
+2. Run following command in Powershell/Terminal to stop all kubernetes pods and services
 ```sh
   skaffold delete --namespace=default
 ```
