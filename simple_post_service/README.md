@@ -7,7 +7,7 @@
 
 
 # Installation in Windows
-Please note WSL2 is required for running docker.\\
+Please note WSL2 is required for running docker.<br/>
 If you are running VMware, you would have to disable Intel VT-x/EPT or AMD-V/RVI in vm settings.
 
 ## Node.js
@@ -143,10 +143,10 @@ Detailed installation can be found [here](https://skaffold.dev/docs/install).
 ```sh
   skaffold delete --namespace=default
 ```
-In MacOS, even without using Skaffold, you can stop all kubernetes pods and services.\\
-\\
-You can also stop kubernetes pods and services without Skaffold.\\
-Go to "..\web\simple_post_service\infra\k8s" folder.\\
+In MacOS, even without using Skaffold, you can stop all kubernetes pods and services.<br/>
+<br/>
+You can also stop kubernetes pods and services without Skaffold.<br/>
+Go to "..\web\simple_post_service\infra\k8s" folder.<br/>
 Run below command in PowerShell/Terminal -
 ```sh
   kubectl delete -f .
