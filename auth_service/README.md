@@ -121,10 +121,10 @@ Detailed installation can be found [here](https://skaffold.dev/docs/install).
 ```
 
 
-# Run post service
+# Run auth service
 
 ## Run Skaffold
-1. Go to "..\web\simple_post_service" folder.
+1. Go to "..\web\auth_service" folder.
 2. Run below command in PowerShell.
 ```sh
   skaffold dev
@@ -134,7 +134,7 @@ Detailed installation can be found [here](https://skaffold.dev/docs/install).
 ## Open react app
 1. Open Chrome.
 2. Go to "https://auth.dev" page.
-3. It will show an error that *Your connection isn't private". DO NOT TRY TO CONTINUE TO post.com (unsafe) through Advanced option.
+3. It will show an error that *Your connection isn't private". DO NOT TRY TO CONTINUE TO auth.dev (unsafe) through Advanced option.
 4. Manually type *thisisunsafe* to skip the error.
 Please note that signup/signin/signout buttons are present in the top-right corner.
 
@@ -147,8 +147,16 @@ Please note that signup/signin/signout buttons are present in the top-right corn
 In MacOS, even without using Skaffold, you can stop all kubernetes pods and services.<br/>
 <br/>
 You can also stop kubernetes pods and services without Skaffold.<br/>
-Go to "..\web\simple_post_service\infra\k8s" folder.<br/>
+Go to "..\web\auth_service\infra\k8s" folder.<br/>
 Run below command in PowerShell/Terminal -
 ```sh
   kubectl delete -f .
+```
+
+## Run unit tests
+Go to "auth" directory. Install node modules and run tests
+```sh
+  cd auth
+  npm i
+  npm run test
 ```
