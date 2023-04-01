@@ -139,8 +139,14 @@ Detailed installation can be found [here](https://skaffold.dev/docs/install).
 
 ## Close all services
 1. Stop Skaffold.
-1. Go to "..\web\simple_post_service\infra\k8s" folder.
-2. Run below command in PowerShell.
+2. Run following command in Powershell (for windows) to stop all kubernetes pods and services
+```sh
+  skaffold delete --namespace=default
+```
+In MacOS, 
+Even without using Skaffold, you can stop all kubernetes pods and services.
+Go to "..\web\simple_post_service\infra\k8s" folder.
+Run below command in PowerShell/Terminal -
 ```sh
   kubectl delete -f .
 ```
