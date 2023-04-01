@@ -148,7 +148,7 @@ Please note that signup/signin/signout buttons are present in the top-right corn
 1. Stop Skaffold with `Ctrl+C`.
 2. Run following command in Powershell/Terminal to stop all kubernetes pods and services
 ```sh
-  skaffold delete --namespace=default
+  kubectl create secret generic jwt-secret --from-literal JWT_KEY=asdf
 ```
 In MacOS, even without using Skaffold, you can stop all kubernetes pods and services.<br/>
 <br/>
