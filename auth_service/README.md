@@ -133,7 +133,7 @@ Detailed installation can be found [here](https://skaffold.dev/docs/install).
 1. Go to "..\web\auth_service" folder.
 2. Run below command in PowerShell/Terminal.
 ```sh
-  kubectl create secret generic jwt-secret --from-literal JWT_KEY=asdf
+  skaffold dev
 ```
 3. First time Skaffold launch often fails. Just run it again if it fails.
 
