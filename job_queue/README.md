@@ -7,7 +7,7 @@ Please refer to ../web/README.md.
 1. Open "C:\Windows\System32\drivers\etc\hosts" in Notepad++.
 2. Add below line at the end of the file.
 ```sh
-  127.0.0.1 auth.dev
+  127.0.0.1 ticketing.dev
 ```
 3. Try to save the file.
 4. The prompt will be shown to launch Notepad++ in Administrator mode. Click on *Yes* button. Click on *Yes* button of UAC prompt.
@@ -20,7 +20,7 @@ Please refer to ../web/README.md.
 ```
 2. Add below line at the end of the file.
 ```sh
-  127.0.0.1 auth.dev
+  127.0.0.1 ticketing.dev
 ```
 
 
@@ -60,6 +60,14 @@ Go to "..\web\auth_service\infra\k8s" folder.<br/>
 Run below command in PowerShell/Terminal -
 ```sh
   kubectl delete -f .
+```
+
+## Run ESLint
+Go to "auth" directory. Install node modules and run tests
+```sh
+  cd auth
+  npm i
+  npm run lint -- --fix
 ```
 
 ## Run unit tests

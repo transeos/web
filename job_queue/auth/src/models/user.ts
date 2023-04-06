@@ -23,12 +23,12 @@ const userSchema = new mongoose.Schema(
   {
     email: {
       type: String,
-      required: true
+      required: true,
     },
     password: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   {
     // Customize the JSON output to remove sensitive information
@@ -38,9 +38,9 @@ const userSchema = new mongoose.Schema(
         delete ret._id;
         delete ret.password;
         delete ret.__v;
-      }
-    }
-  }
+      },
+    },
+  },
 );
 
 // Hash the password before saving the user document
