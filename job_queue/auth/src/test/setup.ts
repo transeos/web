@@ -1,19 +1,20 @@
-import { MongoMemoryServer } from "mongodb-memory-server";
-import mongoose from "mongoose";
-import request from "supertest";
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
+import request from 'supertest';
 
-import { app } from "../app";
+import { app } from '../app';
 
 // Add a global signin method to the Node.js global object
 declare global {
+  // eslint-disable-next-line no-var
   var signin: () => Promise<string[]>;
 }
 
-let mongo: any;
+let mongo: MongoMemoryServer;
 beforeAll(async () => {
-   // Set environment variables for JWT and to allow self-signed certificates
-  process.env.JWT_KEY = "asdfasdf";
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  // Set environment variables for JWT and to allow self-signed certificates
+  process.env.JWT_KEY = 'asdfasdf';
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
   // Create an in-memory MongoDB server and connect to it
   mongo = await MongoMemoryServer.create();
@@ -26,7 +27,7 @@ beforeEach(async () => {
   // Clear all collections before each test
   const collections = await mongoose.connection.db.collections();
 
-  for (let collection of collections) {
+  for (const collection of collections) {
     await collection.deleteMany({});
   }
 });
@@ -41,18 +42,18 @@ afterAll(async () => {
 
 // Define a global signin function that signs up a user and returns their session cookie
 global.signin = async () => {
-  const email = "test@test.com";
-  const password = "password";
+  const email = 'test@test.com';
+  const password = 'password';
 
   const response = await request(app)
-    .post("/api/users/signup")
+    .post('/api/users/signup')
     .send({
       email,
       password,
     })
     .expect(201);
 
-  const cookie = response.get("Set-Cookie");
+  const cookie = response.get('Set-Cookie');
 
   return cookie;
 };
