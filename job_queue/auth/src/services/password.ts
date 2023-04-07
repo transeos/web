@@ -10,7 +10,7 @@ export class Password {
    * @param password - The plaintext password to hash
    * @returns The hashed password as a string
    */
-  static async toHash(password: string) {
+  static async toHash(password: string): Promise<string> {
     // Generate a random salt
     const salt = randomBytes(8).toString('hex');
 
@@ -27,7 +27,7 @@ export class Password {
    * @param suppliedPassword - The plaintext password to compare
    * @returns True if the hashed passwords match, false otherwise
    */
-  static async compare(storedPassword: string, suppliedPassword: string) {
+  static async compare(storedPassword: string, suppliedPassword: string): Promise<boolean> {
     // Split the stored password into its hashed password and salt components
     const [hashedPassword, salt] = storedPassword.split('.');
 
