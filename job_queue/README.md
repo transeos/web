@@ -77,3 +77,10 @@ Go to "auth" directory. Install node modules and run tests
   npm i
   npm run test
 ```
+
+## Test NATS streaming server
+1. Make sure that NATS streaming server is running. If you can start the server by deploying the complete project with "skaffold dev" command.
+2. Make sure the respective port is accessable. If the NATS streaming server is running inside Kubernetes cluster, use port-forwarding -
+```sh
+  kubectl port-forward <nats pod name> 4222:4222
+```
