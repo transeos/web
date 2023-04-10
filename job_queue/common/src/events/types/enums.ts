@@ -1,4 +1,16 @@
-//TODO: delete this enum later.
+export enum UserSigning {
+  SignedUp = 'signed:up',
+  SignedIn = 'signed:in',
+  SignedOut = 'signed:out',
+  Deleted = "deleted"
+}
+
+export enum Analytics {
+  SignInUpdated = 'analytics:sign:updated',
+  SignedInDeleted = 'analytics:sign:deleted',
+}
+
+//TODO: update this enum later.
 export enum Subjects {
   TicketCreated = 'ticket:created',
   TicketUpdated = 'ticket:updated',
@@ -9,6 +21,14 @@ export enum Subjects {
   ExpirationComplete = 'expiration:complete',
 
   PaymentCreated = 'payment:created',
+
+
+  SignedIn = 'signed:in',
+  SignedOut = 'signed:out',
+  SignedUp = 'signed:up',
+  AccountDeleted = 'account:deleted',
+  AnalyticsUpdated = 'analytics:updated',
+  AnalyticsDeleted = 'analytics:deleted',
 }
 
 //TODO: delete this enum later.
