@@ -8,6 +8,7 @@ import { currentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
+import { accountDeletedRouter } from './routes/delete-account';
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
+app.use(accountDeletedRouter);
 
 // Catch-all route handler for 404 Not Found errors
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

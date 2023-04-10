@@ -1,15 +1,11 @@
-import { Subjects, Publisher, SignInEvent, AnalyticsSignInEvent } from "common";
-
-export class SignInEventPublisher extends Publisher<SignInEvent> {
-  readonly subject = Subjects.SignedIn;
-}
-
-export class SignOutEventPublisher extends Publisher<SignInEvent> {
-  readonly subject = Subjects.SignedOut;
-}
+import { Subjects, Publisher, SignInEvent } from "common";
 
 export class SignUpEventPublisher extends Publisher<SignInEvent> {
   readonly subject = Subjects.SignedUp;
+}
+
+export class SignInEventPublisher extends Publisher<SignInEvent> {
+  readonly subject = Subjects.SignedIn;
 }
 
 export class AccountDeletedEventPublisher extends Publisher<SignInEvent> {

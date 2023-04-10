@@ -1,7 +1,6 @@
 export enum UserSigning {
   SignedUp = 'signed:up',
   SignedIn = 'signed:in',
-  SignedOut = 'signed:out',
   Deleted = "deleted"
 }
 
@@ -24,7 +23,6 @@ export enum Subjects {
 
 
   SignedIn = 'signed:in',
-  SignedOut = 'signed:out',
   SignedUp = 'signed:up',
   AccountDeleted = 'account:deleted',
   AnalyticsUpdated = 'analytics:updated',
