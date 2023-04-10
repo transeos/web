@@ -23,8 +23,6 @@ export interface AnalyticsSignInEvent {
   };
 }
 
-
-
 export interface Event {
   subject: Subjects;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

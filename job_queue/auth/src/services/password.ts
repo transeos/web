@@ -27,7 +27,10 @@ export class Password {
    * @param suppliedPassword - The plaintext password to compare
    * @returns True if the hashed passwords match, false otherwise
    */
-  static async compare(storedPassword: string, suppliedPassword: string): Promise<boolean> {
+  static async compare(
+    storedPassword: string,
+    suppliedPassword: string,
+  ): Promise<boolean> {
     // Split the stored password into its hashed password and salt components
     const [hashedPassword, salt] = storedPassword.split('.');
 

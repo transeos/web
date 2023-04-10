@@ -2,7 +2,7 @@ import express from 'express';
 import 'express-async-errors'; // Allows async errors to be properly caught by error handling middleware
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
-import { errorHandler, NotFoundError } from "common";
+import { errorHandler, NotFoundError } from 'common';
 
 import { currentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/signin';

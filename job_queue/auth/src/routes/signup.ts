@@ -1,9 +1,11 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from 'common';
+import { validateRequest, BadRequestError, UserSigning } from 'common';
 
 import { User } from '../models/user';
+import { natsWrapper } from '../nats-wrapper';
+import { SignUpEventPublisher } from '../events/publishers/signin-publishers';
 
 // Create an express router
 const router = express.Router();
@@ -23,6 +25,9 @@ router.post(
   async (req: Request, res: Response) => {
     // Extract email and password from the request body
     const { email, password } = req.body;
+
+    // Get the client's IP address
+    const clientIp = req.ip;
 
     // Check if the user already exists in the database
     const existingUser = await User.findOne({ email });
@@ -55,6 +60,15 @@ router.post(
     req.session = {
       jwt: userJwt,
     };
+
+    const eventPublisher = new SignUpEventPublisher(natsWrapper.client);
+    eventPublisher.publish({
+      userId: user.id,
+      emailId: user.email,
+      deviceIp: clientIp,
+      time: new Date(),
+      type: UserSigning.SignedUp,
+    });
 
     // Send the newly registered user data in the response with a 201 status (Created)
     res.status(201).send(user);

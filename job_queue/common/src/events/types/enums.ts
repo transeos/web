@@ -1,7 +1,7 @@
 export enum UserSigning {
   SignedUp = 'signed:up',
   SignedIn = 'signed:in',
-  Deleted = "deleted"
+  Deleted = 'deleted',
 }
 
 export enum Analytics {
@@ -20,7 +20,6 @@ export enum Subjects {
   ExpirationComplete = 'expiration:complete',
 
   PaymentCreated = 'payment:created',
-
 
   SignedIn = 'signed:in',
   SignedUp = 'signed:up',
