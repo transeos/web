@@ -1,11 +1,15 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError, UserSigning } from 'common';
+import {
+  validateRequest,
+  BadRequestError,
+  UserSigning,
+  natsWrapper,
+} from 'common';
 
 import { User } from '../models/user';
-import { natsWrapper } from '../nats-wrapper';
 import { SignUpEventPublisher } from '../events/publishers/signin-publishers';
+import { Password } from '../utils/route-utils';
 
 // Create an express router
 const router = express.Router();
@@ -41,20 +45,7 @@ router.post(
     // Save the new user to the database
     await user.save();
 
-    if (!process.env.JWT_KEY) {
-      console.error('JWT_KEY not defined');
-      return;
-    }
-
-    // Generate a JSON Web Token (JWT) for the newly registered user
-    const userJwt = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-      },
-      process.env.JWT_KEY,
-      { expiresIn: 24 * 60 * 60 }, // 24 hours in seconds
-    );
+    const userJwt = Password.createJwt(user.id, user.email);
 
     // Store the JWT in the user's session
     req.session = {

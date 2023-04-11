@@ -1,12 +1,14 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError, UserSigning } from 'common';
+import {
+  validateRequest,
+  BadRequestError,
+  UserSigning,
+  natsWrapper,
+} from 'common';
 
-import { Password } from '../services/password';
-import { User } from '../models/user';
-import { natsWrapper } from '../nats-wrapper';
 import { SignInEventPublisher } from '../events/publishers/signin-publishers';
+import { Password } from '../utils/route-utils';
 
 // Create an express router
 const router = express.Router();
@@ -27,38 +29,18 @@ router.post(
     // Extract email and password from the request body
     const { email, password } = req.body;
 
-    // Get the client's IP address
-    const clientIp = req.ip;
-
-    // Check if the user exists in the database
-    const existingUser = await User.findOne({ email });
+    const existingUser = await Password.checkIfEmailAndPasswordMatch(
+      email,
+      password,
+    );
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials');
     }
 
-    // Compare the provided password with the stored password
-    const passwordsMatch = await Password.compare(
-      existingUser.password,
-      password,
-    );
-    if (!passwordsMatch) {
-      throw new BadRequestError('Invalid Credentials');
-    }
+    // Get the client's IP address
+    const clientIp = req.ip;
 
-    if (!process.env.JWT_KEY) {
-      console.error('JWT_KEY not defined');
-      return;
-    }
-
-    // Generate a JSON Web Token (JWT) for the authenticated user
-    const userJwt = jwt.sign(
-      {
-        id: existingUser.id,
-        email: existingUser.email,
-      },
-      process.env.JWT_KEY,
-      { expiresIn: 24 * 60 * 60 }, // 24 hours in seconds
-    );
+    const userJwt = Password.createJwt(existingUser.id, existingUser.email);
 
     // Store the JWT in the user's session
     req.session = {

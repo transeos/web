@@ -32,8 +32,7 @@ app.use(signupRouter);
 app.use(accountDeletedRouter);
 
 // Catch-all route handler for 404 Not Found errors
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.all('*', async (req, res) => {
+app.all('*', async () => {
   throw new NotFoundError();
 });
 
