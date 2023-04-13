@@ -1,5 +1,27 @@
 // TODO update this file later
-import { OrderStatus, Subjects } from './enums';
+import { OrderStatus } from './enums';
+import { UserSigning, Analytics, Subjects } from './enums';
+
+export interface SignInEvent {
+  subject: Subjects;
+  data: {
+    userId: string;
+    emailId: string;
+    deviceIp: string;
+    time: Date;
+    type: UserSigning;
+  };
+}
+
+export interface AnalyticsSignInEvent {
+  subject: Subjects;
+  data: {
+    userId: string;
+    deviceIp: string;
+    time: Date;
+    type: Analytics;
+  };
+}
 
 export interface Event {
   subject: Subjects;

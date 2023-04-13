@@ -1,9 +1,15 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '@cygnetops/common-v2';
+import {
+  validateRequest,
+  BadRequestError,
+  UserSigning,
+  natsWrapper,
+} from 'common';
 
 import { User } from '../models/user';
+import { SignUpEventPublisher } from '../events/publishers/signin-publishers';
+import { Password } from '../utils/route-utils';
 
 // Create an express router
 const router = express.Router();
@@ -24,6 +30,9 @@ router.post(
     // Extract email and password from the request body
     const { email, password } = req.body;
 
+    // Get the client's IP address
+    const clientIp = req.ip;
+
     // Check if the user already exists in the database
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -36,25 +45,21 @@ router.post(
     // Save the new user to the database
     await user.save();
 
-    if (!process.env.JWT_KEY) {
-      console.error('JWT_KEY not defined');
-      return;
-    }
-
-    // Generate a JSON Web Token (JWT) for the newly registered user
-    const userJwt = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-      },
-      process.env.JWT_KEY,
-      { expiresIn: 24 * 60 * 60 }, // 24 hours in seconds
-    );
+    const userJwt = Password.createJwt(user.id, user.email);
 
     // Store the JWT in the user's session
     req.session = {
       jwt: userJwt,
     };
+
+    const eventPublisher = new SignUpEventPublisher(natsWrapper.client);
+    eventPublisher.publish({
+      userId: user.id,
+      emailId: user.email,
+      deviceIp: clientIp,
+      time: new Date(),
+      type: UserSigning.SignedUp,
+    });
 
     // Send the newly registered user data in the response with a 201 status (Created)
     res.status(201).send(user);

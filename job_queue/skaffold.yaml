@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2alpha3
+apiVersion: skaffold/v2beta11
 kind: Config
 deploy:
   kubectl:
@@ -9,13 +9,15 @@ build:
     push: false
   artifacts:
     - image: cygnetops/auth
-      context: auth
+      context: .
       docker:
-        dockerfile: Dockerfile
+        dockerfile: ./auth/Dockerfile
       sync:
         manual:
-          - src: 'src/**/*.ts'
-            dest: .
+          - src: 'auth/src/**/*.ts'
+            dest: ..
+          - src: 'common/src/**/*.ts'
+            dest: ..
     - image: cygnetops/ticketing-client
       context: client
       docker:

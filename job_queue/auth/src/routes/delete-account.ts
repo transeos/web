@@ -7,7 +7,8 @@ import {
   natsWrapper,
 } from 'common';
 
-import { SignInEventPublisher } from '../events/publishers/signin-publishers';
+import { User } from '../models/user';
+import { AccountDeletedEventPublisher } from '../events/publishers/signin-publishers';
 import { Password } from '../utils/route-utils';
 
 // Create an express router
@@ -15,7 +16,7 @@ const router = express.Router();
 
 // Define a route for user sign in
 router.post(
-  '/api/users/signin',
+  '/api/users/delete',
   [
     // Validate the email and password in the request body
     body('email').isEmail().withMessage('Email must be valid'),
@@ -40,25 +41,23 @@ router.post(
     // Get the client's IP address
     const clientIp = req.ip;
 
-    const userJwt = Password.createJwt(existingUser.id, existingUser.email);
+    await User.deleteOne({ email });
 
-    // Store the JWT in the user's session
-    req.session = {
-      jwt: userJwt,
-    };
-
-    const eventPublisher = new SignInEventPublisher(natsWrapper.client);
+    const eventPublisher = new AccountDeletedEventPublisher(natsWrapper.client);
     eventPublisher.publish({
       userId: existingUser.id,
       emailId: existingUser.email,
       deviceIp: clientIp,
       time: new Date(),
-      type: UserSigning.SignedIn,
+      type: UserSigning.Deleted,
     });
 
-    // Send the authenticated user data in the response
-    res.status(200).send(existingUser);
+    // Clear the user's session
+    req.session = null;
+
+    // Send an empty object as a response
+    res.send({});
   },
 );
 
-export { router as signinRouter };
+export { router as accountDeletedRouter };

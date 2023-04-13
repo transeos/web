@@ -15,3 +15,4 @@ export * from './events/base-listener';
 export * from './events/base-publisher';
 export * from './events/types/enums';
 export * from './events/types/interfaces';
+export * from './events/nats-wrapper';

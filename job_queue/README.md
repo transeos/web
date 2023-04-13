@@ -63,17 +63,17 @@ Run below command in PowerShell/Terminal -
 ```
 
 ## Run ESLint
-Go to "auth" directory. Install node modules and run tests
+Go to a project directory. Install node modules and run tests
 ```sh
-  cd auth
+  cd <project>
   npm i
   npm run lint -- --fix
 ```
 
 ## Run unit tests
-Go to "auth" directory. Install node modules and run tests
+Go to a project directory. Install node modules and run tests
 ```sh
-  cd auth
+  cd <project>
   npm i
   npm run test
 ```

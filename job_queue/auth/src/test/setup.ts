@@ -4,6 +4,8 @@ import request from 'supertest';
 
 import { app } from '../app';
 
+jest.mock('../nats-wrapper');
+
 // Add a global signin method to the Node.js global object
 declare global {
   // eslint-disable-next-line no-var

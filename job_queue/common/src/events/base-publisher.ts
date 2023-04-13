@@ -3,7 +3,7 @@ import { Event } from './types/interfaces';
 
 // Create an abstract Publisher class that expects a generic Event type
 export abstract class Publisher<T extends Event> {
-  abstract subject: T['subject'];
+  abstract readonly subject: T['subject'];
 
   // Declare a property for the NATS client
   protected client: Stan;
